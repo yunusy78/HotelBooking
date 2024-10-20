@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Features\Mediator\Commands\" />
+      <Folder Include="Features\Mediator\Handlers\" />
+      <Folder Include="Features\Mediator\Queries\" />
+      <Folder Include="Features\Mediator\Results\" />
+      <Folder Include="Services\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\HotellBooking.Domain\HotellBooking.Domain.csproj" />
+    </ItemGroup>
+
+</Project>
