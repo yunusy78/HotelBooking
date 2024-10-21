@@ -74,28 +74,42 @@ public class DbInitializer
             context.Informations.Add(information);
             context.SaveChanges();
             
-            var roomType = new RoomType
-            
+
+            var roomType2 = new List<RoomType>()
             {
-                Name = "Single Room",
-                Description = "A single room is a room with one single bed.",
-                
+                new RoomType
+
+                {
+                    Name = "Single Room",
+                    Description = "A single room is a room with one single bed.",
+
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
                     IsActive = true
-                
+
+                },
+
+                new RoomType()
+                {
+                    Name = "Double Room",
+                    Description = "A double room is a room with two single beds.",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    IsActive = true
+
+                }
+
             };
             
-            context.RoomTypes.Add(roomType);
+            context.RoomTypes.AddRangeAsync(roomType2);
             context.SaveChanges();
             
             var room = new Room
             {
                 Name = "101",
                 Description = "A single room with a view of the city.",
-                RoomTypeId = roomType.Id,
+                RoomTypeId = roomType2[0].Id,
                 Capacity = 4,
-                InformationId =information.Id,
                 ChildPrice = 200,
                 BabyPrice = 0,
                 AdultPrice = 300,
@@ -107,7 +121,27 @@ public class DbInitializer
                 
             };
             
+            
+            var room2 = new Room
+            {
+                Name = "103",
+                Description = "A single room with a view of the city.",
+                RoomTypeId = roomType2[1].Id,
+                Capacity = 4,
+                ChildPrice = 300,
+                BabyPrice = 0,
+                AdultPrice = 400,
+                HotelId = hotel.Id,
+               
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                IsActive = true
+                
+            };
+            
+            
             context.Rooms.Add(room);
+            context.Rooms.Add(room2);
             context.SaveChanges();
             
             var roomImage = new RoomImage

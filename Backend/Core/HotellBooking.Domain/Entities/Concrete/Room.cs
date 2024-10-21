@@ -13,8 +13,6 @@ public class Room
     
     public int? Capacity { get; set; }
     
-    public int InformationId { get; set; }
-    
     public int HotelId { get; set; }
     
     public Hotel? Hotel { get; set; }

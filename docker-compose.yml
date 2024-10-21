@@ -1,0 +1,16 @@
+﻿services:
+  hotellbooking.webapi:
+    image: hotellbooking.webapi
+    build:
+      context: .
+      dockerfile: Backend/Presetatiton/HotellBooking.WebApi/Dockerfile
+    ports:
+        - 7025:80
+        - 443:443
+    container_name: hotellbooking.webapi
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Production
+      - "ConnectionStrings__DefaultConnection=DataSource=hotellbook0.db;Cache=Shared"
+    volumes:
+      - ./app/wwwroot:/app/wwwroot  

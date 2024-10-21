@@ -44,6 +44,36 @@ public class EfReservationRepository : EfGenericRepository<Reservation>, IEfRese
 
     public Task<List<Reservation>> GetByFilterAsync(Expression<Func<Reservation, bool>> filter)
     {
-        throw new NotImplementedException();
+        var reservations = _context.Reservations
+            .Include(r => r.Room)
+            .ThenInclude(x=>x.Type) 
+            .Include(r => r.Room)
+            .ThenInclude(x=>x.RoomImages)
+            .Include(r => r.Room)
+            .ThenInclude(x=>x.RoomFacilities)!
+            .ThenInclude(x=>x.Facilities)
+            .Include(r => r.Room)
+            .ThenInclude(x=>x.Hotel)
+            .Include(x=>x.GuestLists)
+            .Where(filter)
+            .ToListAsync();
+        return reservations;
+    }
+    
+    public Task<List<Reservation>> GetReservationWithRoomAndStatusAndPricingByIdAsync(int hotelId, string roomName)
+    {
+        var reservation = _context.Reservations
+            .Include(r => r.Room)
+            .ThenInclude(x => x.Type)
+            .Include(r => r.Room)
+            .ThenInclude(x => x.RoomImages)
+            .Include(r => r.Room)
+            .ThenInclude(x => x.RoomFacilities)!
+            .ThenInclude(x => x.Facilities)
+            .Include(r => r.Room)
+            .ThenInclude(x => x.Hotel)
+            .Include(x => x.GuestLists)
+            .Where(x => x.Room.HotelId == hotelId && x.Room.Name == roomName).ToListAsync();
+        return reservation;
     }
 }

@@ -10,4 +10,7 @@ public interface IEfReservationRepository : IEfGenericRepository<Reservation>
     Task<List<Reservation>> GetReservationWithRoomAndStatusAndPricingAsync();
     Task<List<Reservation>> GetByFilterAsync(Expression<Func<Reservation, bool>> filter);
     
+    Task<List<Reservation>> GetReservationWithRoomAndStatusAndPricingByIdAsync(int hotelId, string roomName);
+    
+    
 }

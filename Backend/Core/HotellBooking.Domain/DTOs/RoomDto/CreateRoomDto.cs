@@ -10,8 +10,6 @@ public class CreateRoomDto
     
     public int? Capacity { get; set; }
     
-    public int InformationId { get; set; }
-    
     public int HotelId { get; set; }
     
     public decimal AdultPrice { get; set; }

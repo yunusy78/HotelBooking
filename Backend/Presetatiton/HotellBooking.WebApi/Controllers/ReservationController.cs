@@ -35,6 +35,16 @@ public class ReservationController : ControllerBase
         var mapperReservations = _mapper.Map<List<GetResultReservationDto>>(reservations);
         return Ok(mapperReservations);
     }
+    
+    [HttpGet("GetRoomWithName/{hotelId}/{roomName}")]
+    public async Task<IActionResult> GetRoomWithName(int hotelId, string roomName)
+    {
+       
+        var reservation = await _reservationService.GetReservationWithRoomAndStatusAndPricingByIdAsync(hotelId, roomName);
+        var mappedRoom = _mapper.Map<List<GetResultReservationDto>>(reservation);
+        return Ok(mappedRoom);
+    }
+    
 
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
